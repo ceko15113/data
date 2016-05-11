@@ -27,7 +27,7 @@ int main(void)
 		printf("%d 番目の英単語を入力してください(15 文字以内):\n--> ", i++);
 		scanf("%s", p);
 		remove_period(p);
-		if (!strcmp(word, "*")) break;
+		if (!strcmp(p, "*")) break;
 		len = strlen(p);
 		word_len[len - 1]++;
 	}

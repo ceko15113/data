@@ -26,8 +26,10 @@ int main(void)
 	num = find(p, ' ');
 	if (num != -1)
 		printf("%d文字目に見つかりました！\n", num);
-	else
+	else {
 		printf("スペース記号は見つかりませんでした");
+		return 0;
+	}
 
 	str = (char *)malloc((num + 1) * sizeof(char));
 
