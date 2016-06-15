@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define INIT_ELEM 20
+#define N 5
+
 int n_comp, n_exchange;
 
 void swap(int *x, int *y)
@@ -17,8 +20,8 @@ xmalloc(size_t sz)
 	void *ptr;
 	ptr = malloc(sz);
 	if (!ptr) {
-		printf("malloc: メモリを確保できません\n");
-		exit(1);
+		perror("malloc");
+		exit(EXIT_FAILURE);
 	}
 	return ptr;
 }
@@ -82,35 +85,39 @@ void setRandomValue(int data[], int num)
 
 int main(void)
 {
-	int i, j;
-	int *quick[5], *bubble[5];
+	int i, j, bufsize;
+	int *quick[N], *bubble[N];
 
-	for (i = 0, j = 20; i < 5; i++, j += 20) {
-		quick[i] = (int *)xmalloc(j);
-		bubble[i] = (int *)xmalloc(j);
-		setRandomValue(quick[i], j);
-		bubble[i][j] = quick[i][j];
+	for (i = 0, bufsize = INIT_ELEM; i < N; i++, bufsize += 20) {
+		quick[i] = (int *)xmalloc(bufsize * sizeof(int));
+		bubble[i] = (int *)xmalloc(bufsize * sizeof(int));
+		setRandomValue(quick[i], bufsize);
+		for (j = 0; j < bufsize; j++) bubble[i][j] = quick[i][j];
 	}
 
 	printf("＜クイックソート法＞\n");
-	for (i = 0, j = 20; i < 5; i++, j += 20) {
-		printf("　データ数：%d 個\n", j);
+	printf("\n");
+	for (i = 0, bufsize = INIT_ELEM; i < N; i++, bufsize += 20) {
+		printf("　データ数：%d 個\n", bufsize);
 		n_comp = n_exchange = 0;
-		quick_sort(quick[i], 0, j - 1);
+		quick_sort(quick[i], 0, bufsize - 1);
 		printf("　比較回数：%d 回\n", n_comp);
 		printf("　交換回数：%d 回\n", n_exchange);
+		printf("\n");
 	}
+	printf("\n");
 
 	printf("＜バブルソート法＞\n");
-	for (i = 0, j = 20; i < 5; i++, j += 20) {
-		printf("　データ数：%d 個\n", j);
+	printf("\n");
+	for (i = 0, bufsize = INIT_ELEM; i < N; i++, bufsize += 20) {
+		printf("　データ数：%d 個\n", bufsize);
 		n_comp = n_exchange = 0;
-		bubble_sort(bubble[i], j);
+		bubble_sort(bubble[i], bufsize);
 		printf("　比較回数：%d 回\n", n_comp);
 		printf("　交換回数：%d 回\n", n_exchange);
+		printf("\n");
 	}
+	printf("\n");
 
 	return 0;
 }
-
-

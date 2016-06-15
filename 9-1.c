@@ -4,10 +4,10 @@
 
 int path = 0;
 
-void print_array(int a[])
+void print_array(int a[], int n)
 {
 	int i;
-	for (i = 0; i < N; i++) printf("%d ", a[i]);
+	for (i = 0; i < n; i++) printf("%d ", a[i]);
 	printf("\n");
 }
 
@@ -31,10 +31,10 @@ void quick(int a[], int left, int right)
 	pivot = (a[pl] + a[pr]) / 2;
 
 	printf("　左端の添え字：%d\n", pl);
-	printf("　右端の添え字：%d\n", pl);
+	printf("　右端の添え字：%d\n", pr);
 	printf("　ピボットの値：%d\n", pivot);
 	printf("　左端〜右端の値：");
-	print_array(a);
+	print_array(a, right + 1);
 
 	while (1) {
 		while (a[pl] < pivot) {
@@ -52,7 +52,8 @@ void quick(int a[], int left, int right)
 	}
 
 	printf("＜ソーティング結果＞\n");
-	print_array(a);
+	printf("　左端〜右端の値：");
+	print_array(a, right + 1);
 	printf("\n");
 
 	if (left < pr) {
