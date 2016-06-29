@@ -13,7 +13,7 @@ int main(void)
 	int data[SIZE];
 
 	memset(data, -1, sizeof(data));
-	for (i = 0, n = 2; i < SIZE; i++, n += 20) {
+	for (i = 0, n = 2; i < SIZE; i++, n += 2) {
 		data[i] = n;
 	}
 	while (1) {
